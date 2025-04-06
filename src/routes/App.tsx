@@ -1,3 +1,5 @@
+import TiptapEditor from '../components/TiptapEditor';
+
 const App = () => {
   return (
     <div className="flex flex-col h-screen w-full">
@@ -15,10 +17,9 @@ const App = () => {
         </div>
         
         {/* Editor Area (Middle) */}
-        <div className="flex-1 bg-white p-4 overflow-y-auto">
-          <h2 className="text-lg font-medium mb-4">Editor Area</h2>
-          <div className="border border-gray-300 rounded-md p-4 min-h-[400px]">
-            Editor content will go here
+        <div className="flex-1 bg-white p-4 overflow-y-auto flex flex-col">
+          <div className="border border-gray-300 rounded-md p-4 flex-1 h-full">
+            <TiptapEditor />
           </div>
         </div>
         
