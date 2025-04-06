@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import TypographyItems from '../../extensions/typography/TypographyItems';
 import { panelVariants, itemVariants } from './animations';
-import { useEditorContext } from '../../context/useEditorContext';
 
 const LeftPanel = () => {
   return (
