@@ -74,9 +74,7 @@ const getHeadingStyles = (level: Level): React.CSSProperties => {
 };
 
 const HeadingView: React.FC<NodeViewProps> = ({ node, selected }) => {
-  const level = node.attrs.level as Level;
-  const color = node.attrs.color as string;
-  const backgroundColor = node.attrs.backgroundColor as string;
+  const { level, color, backgroundColor } = node.attrs;
   const Tag = `h${level}` as React.ElementType;
   const styles = {
     ...getHeadingStyles(level),
