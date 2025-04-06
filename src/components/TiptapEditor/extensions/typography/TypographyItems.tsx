@@ -1,6 +1,5 @@
 import React from 'react';
 import { Editor } from '@tiptap/react';
-import { Level } from '@tiptap/extension-heading';
 import { Type, Heading1, Heading2, Heading3, Heading4, Heading5, Heading6 } from 'lucide-react';
 import TypographyItem from './TypographyItem';
 import { applyTextStyle, applyHeading, handleDragStart } from './utils';
@@ -10,16 +9,6 @@ interface TypographyItemsProps {
 }
 
 const TypographyItems: React.FC<TypographyItemsProps> = ({ editor }) => {
-  // Check if a specific heading level is active
-  const isHeadingActive = (level: Level) => {
-    return editor?.isActive('heading', { level }) || false;
-  };
-
-  // Check if paragraph is active
-  const isTextActive = () => {
-    return editor?.isActive('paragraph') || false;
-  };
-
   return (
     <>
       <h2 className="text-lg font-medium mb-4">Text</h2>
@@ -29,7 +18,6 @@ const TypographyItems: React.FC<TypographyItemsProps> = ({ editor }) => {
         <TypographyItem
           icon={<Type size={22} />}
           label="Text"
-          isActive={isTextActive()}
           onDragStart={(e) => handleDragStart(e, 'paragraph')}
           onClick={() => applyTextStyle(editor)}
         />
@@ -38,7 +26,6 @@ const TypographyItems: React.FC<TypographyItemsProps> = ({ editor }) => {
         <TypographyItem
           icon={<Heading1 size={22} />}
           label="Head 1"
-          isActive={isHeadingActive(1)}
           onDragStart={(e) => handleDragStart(e, 'heading', 1)}
           onClick={() => applyHeading(editor, 1)}
         />
@@ -47,7 +34,6 @@ const TypographyItems: React.FC<TypographyItemsProps> = ({ editor }) => {
         <TypographyItem
           icon={<Heading2 size={22} />}
           label="Head 2"
-          isActive={isHeadingActive(2)}
           onDragStart={(e) => handleDragStart(e, 'heading', 2)}
           onClick={() => applyHeading(editor, 2)}
         />
@@ -56,7 +42,6 @@ const TypographyItems: React.FC<TypographyItemsProps> = ({ editor }) => {
         <TypographyItem
           icon={<Heading3 size={22} />}
           label="Head 3"
-          isActive={isHeadingActive(3)}
           onDragStart={(e) => handleDragStart(e, 'heading', 3)}
           onClick={() => applyHeading(editor, 3)}
         />
@@ -65,7 +50,6 @@ const TypographyItems: React.FC<TypographyItemsProps> = ({ editor }) => {
         <TypographyItem
           icon={<Heading4 size={22} />}
           label="Head 4"
-          isActive={isHeadingActive(4)}
           onDragStart={(e) => handleDragStart(e, 'heading', 4)}
           onClick={() => applyHeading(editor, 4)}
         />
@@ -74,7 +58,6 @@ const TypographyItems: React.FC<TypographyItemsProps> = ({ editor }) => {
         <TypographyItem
           icon={<Heading5 size={22} />}
           label="Head 5"
-          isActive={isHeadingActive(5)}
           onDragStart={(e) => handleDragStart(e, 'heading', 5)}
           onClick={() => applyHeading(editor, 5)}
         />
@@ -83,7 +66,6 @@ const TypographyItems: React.FC<TypographyItemsProps> = ({ editor }) => {
         <TypographyItem
           icon={<Heading6 size={22} />}
           label="Head 6"
-          isActive={isHeadingActive(6)}
           onDragStart={(e) => handleDragStart(e, 'heading', 6)}
           onClick={() => applyHeading(editor, 6)}
         />
