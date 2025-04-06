@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { useEditor as useTiptapEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Heading from "@tiptap/extension-heading";
 import { motion } from "framer-motion";
 import LeftPanel from "./layouts/LeftPanel";
 import RightPanel from "./layouts/RightPanel";
 import EditorArea from "./layouts/EditorArea";
 import { containerVariants } from "./layouts/animations";
 import { EditorProvider } from "./context/EditorContext";
+import Heading from "./extensions/Heading";
+import "./styles/editor.css";
 
 interface TiptapEditorProps {
   onEditorReady?: (editor: ReturnType<typeof useTiptapEditor>) => void;
@@ -16,10 +17,12 @@ interface TiptapEditorProps {
 const TiptapEditor = ({ onEditorReady }: TiptapEditorProps) => {
   const editor = useTiptapEditor({
     extensions: [
-      StarterKit,
-      Heading.configure({
-        levels: [1, 2, 3, 4, 5, 6],
+      StarterKit.configure({
+        // Disable the default heading extension from StarterKit
+        heading: false,
       }),
+      // Use our React-based heading extension instead
+      Heading,
     ],
     content: "<p>Hello World! 🌎️</p>",
     editorProps: {

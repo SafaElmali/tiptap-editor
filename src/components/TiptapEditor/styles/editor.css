@@ -1,0 +1,20 @@
+/* Editor content styles */
+.ProseMirror {
+  padding: 1rem;
+  outline: none;
+}
+
+/* Editor content container */
+.tiptap {
+  height: 100%;
+}
+
+.editor-area {
+  height: 100%;
+}
+
+/* Add a subtle indicator when content is selected */
+.ProseMirror-selectednode {
+  outline: 2px solid #68cef8;
+  border-radius: 0.25rem;
+}
