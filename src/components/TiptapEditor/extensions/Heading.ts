@@ -1,5 +1,5 @@
 import { Node as ProseMirrorNode } from 'prosemirror-model';
-import { mergeAttributes } from '@tiptap/core';
+import { mergeAttributes, CommandProps } from '@tiptap/core';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import { Node } from '@tiptap/core';
 import HeadingView from '../components/Heading/HeadingView';
@@ -26,9 +26,7 @@ declare module '@tiptap/core' {
   }
 }
 
-type CommandProps = {
-  commands: Record<string, (...args: any[]) => boolean>
-};
+// Using CommandProps imported from @tiptap/core
 
 const Heading = Node.create<HeadingOptions>({
   name: 'heading',
@@ -53,6 +51,24 @@ const Heading = Node.create<HeadingOptions>({
         },
         renderHTML: (attributes: { level: Level }) => ({
           'data-level': attributes.level,
+        }),
+      },
+      color: {
+        default: '#1a202c',
+        parseHTML: (element: HTMLElement) => {
+          return element.getAttribute('data-color') || '#1a202c';
+        },
+        renderHTML: (attributes: { color: string }) => ({
+          'data-color': attributes.color,
+        }),
+      },
+      backgroundColor: {
+        default: 'transparent',
+        parseHTML: (element: HTMLElement) => {
+          return element.getAttribute('data-background-color') || 'transparent';
+        },
+        renderHTML: (attributes: { backgroundColor: string }) => ({
+          'data-background-color': attributes.backgroundColor,
         }),
       },
     }

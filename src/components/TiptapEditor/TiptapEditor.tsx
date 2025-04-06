@@ -7,6 +7,7 @@ import RightPanel from "./layouts/RightPanel";
 import EditorArea from "./layouts/EditorArea";
 import { containerVariants } from "./layouts/animations";
 import { EditorProvider } from "./context/EditorContext";
+import { ActiveNodeProvider } from "./context/ActiveNodeContext";
 import Heading from "./extensions/Heading";
 import "./styles/editor.css";
 
@@ -123,31 +124,33 @@ const TiptapEditor = ({ onEditorReady }: TiptapEditorProps) => {
 
   return (
     <EditorProvider editor={editor}>
-      <motion.div
-        className="tiptap-editor-container h-full flex"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        {/* Left Panel */}
-        <motion.div className="w-64 border-r border-gray-200 overflow-y-auto">
-          <LeftPanel />
+      <ActiveNodeProvider>
+        <motion.div
+          className="tiptap-editor-container h-full flex"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
+          {/* Left Panel */}
+          <motion.div className="w-64 border-r border-gray-200 overflow-y-auto">
+            <LeftPanel />
+          </motion.div>
+          
+          {/* Editor Area */}
+          <motion.div className="flex-1 flex flex-col">
+            <EditorArea
+              handleContainerClick={handleContainerClick}
+              handleDrop={handleDrop}
+              handleDragOver={handleDragOver}
+            />
+          </motion.div>
+          
+          {/* Right Panel */}
+          <motion.div className="w-64 border-l border-gray-200 p-4 overflow-y-auto">
+            <RightPanel />
+          </motion.div>
         </motion.div>
-        
-        {/* Editor Area */}
-        <motion.div className="flex-1 flex flex-col">
-          <EditorArea
-            handleContainerClick={handleContainerClick}
-            handleDrop={handleDrop}
-            handleDragOver={handleDragOver}
-          />
-        </motion.div>
-        
-        {/* Right Panel */}
-        <motion.div className="w-64 border-l border-gray-200 p-4 overflow-y-auto">
-          <RightPanel />
-        </motion.div>
-      </motion.div>
+      </ActiveNodeProvider>
     </EditorProvider>
   );
 };

@@ -13,9 +13,8 @@ interface HeadingStyles {
 }
 
 // Common styles for all headings
-const commonHeadingStyles: Omit<HeadingStyles, "fontSize" | "lineHeight"> = {
+const commonHeadingStyles: Omit<HeadingStyles, "fontSize" | "lineHeight" | "color"> = {
   fontWeight: "600",
-  color: "#1a202c",
   marginBottom: "0.75rem",
   fontFamily: "inherit",
 };
@@ -37,10 +36,6 @@ const headingLevelStyles: Record<
   2: {
     fontSize: "2rem",
     lineHeight: "1.3",
-    additionalStyles: {
-      borderBottom: "1px solid #e2e8f0",
-      paddingBottom: "0.25rem",
-    },
   },
   3: {
     fontSize: "1.75rem",
@@ -78,14 +73,26 @@ const getHeadingStyles = (level: Level): React.CSSProperties => {
   };
 };
 
-const HeadingView: React.FC<NodeViewProps> = ({ node }) => {
+const HeadingView: React.FC<NodeViewProps> = ({ node, selected }) => {
   const level = node.attrs.level as Level;
+  const color = node.attrs.color as string;
+  const backgroundColor = node.attrs.backgroundColor as string;
   const Tag = `h${level}` as React.ElementType;
-  const styles = getHeadingStyles(level);
+  const styles = {
+    ...getHeadingStyles(level),
+    color: color,
+    backgroundColor: backgroundColor
+  };
 
   return (
     <NodeViewWrapper>
-      <Tag style={styles} data-level={level}>
+      <Tag
+        style={styles}
+        className={`heading-level-${level} ${selected ? "selected" : ""}`}
+        data-level={level}
+        data-color={color}
+        data-background-color={backgroundColor}
+      >
         <NodeViewContent />
       </Tag>
     </NodeViewWrapper>
