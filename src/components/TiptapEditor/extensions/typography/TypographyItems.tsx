@@ -1,14 +1,11 @@
 import React from 'react';
-import { Editor } from '@tiptap/react';
 import { Type, Heading1, Heading2, Heading3, Heading4, Heading5, Heading6 } from 'lucide-react';
 import TypographyItem from './TypographyItem';
 import { applyTextStyle, applyHeading, handleDragStart } from './utils';
+import { useEditorContext } from '../../context/useEditorContext';
 
-interface TypographyItemsProps {
-  editor: Editor | null;
-}
-
-const TypographyItems: React.FC<TypographyItemsProps> = ({ editor }) => {
+const TypographyItems: React.FC = () => {
+  const { editor } = useEditorContext();
   return (
     <>
       <h2 className="text-lg font-medium mb-4">Text</h2>
